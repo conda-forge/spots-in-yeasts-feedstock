@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/spots-in-yeasts-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/spots-in-yeasts-{{ version }}.tar.gz
   sha256: 6f75a75d001917fb455e4e459a63594e47d377334b1948f97f541c84aaf6371b
 
 build:
@@ -14,12 +14,12 @@ build:
   script: {{ PYTHON }} -m pip install . -vv
   script_env:
     - QT_QPA_PLATFORM=offscreen
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools >=42.0.0
     - wheel
   run:
@@ -30,7 +30,7 @@ requirements:
     - napari
     - numpy
     - opencv
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - scikit-image
     - termcolor
@@ -45,6 +45,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/spots-in-yeasts/
